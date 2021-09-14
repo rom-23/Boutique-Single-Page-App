@@ -5,6 +5,20 @@ import Service from '../service.js';
 
 Vue.use(Vuex);
 
+const myPlugin = store => {
+    // called when the store is initialized
+    store.subscribe((mutation, state) => {
+        if (mutation.type === 'GET_POSTS') {
+            // alert('PLUGIN : mutation GET_POSTS appellée');
+        }
+        // called after every mutation.
+        console.log('called after every mutation.');
+        // The mutation comes in the format of `{ type, payload }`.
+        console.log(mutation);
+        console.log(state);
+    });
+};
+
 //to handle state
 const state = {
     posts: []
@@ -21,8 +35,8 @@ const actions = {
     getPosts({commit}) {
         Service.get(
             'http://127.0.0.1:8000/api/posts',
-            (response) => {
-                commit('SET_POSTS', response.data['hydra:member']);
+            (response) => { console.log(response.data['hydra:member']);
+                commit('GET_POSTS', response.data['hydra:member']);
             }
         ).catch(error => {
             console.log(error.message);
@@ -31,8 +45,12 @@ const actions = {
 };
 
 const mutations = {
-    SET_POSTS(state, posts) {
+    GET_POSTS(state, posts) {
         state.posts = posts;
+    },
+    setError(state, msg) {
+        state.error = msg;
+        if (msg) { console.log(`Error: ${msg}`); }
     }
 };
 
@@ -41,5 +59,6 @@ export default new Vuex.Store({
     state,
     getters,
     actions,
-    mutations
+    mutations,
+    plugins: [myPlugin]
 });

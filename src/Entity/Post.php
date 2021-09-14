@@ -15,7 +15,9 @@ use Symfony\Component\Validator\Constraints\Valid;
  */
 #[ApiResource(
     collectionOperations: [
-        'get',
+        'get'=> [
+            'normalization_context' => ['groups' => ['read:Post:collection', 'read:Post:item', 'read:Post']]
+        ],
         'post'
     ],
     itemOperations: [

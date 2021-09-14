@@ -6,6 +6,9 @@
                 <th class="text-left">
                     Email
                 </th>
+                <th class="text-left">
+                    Category
+                </th>
             </tr>
             </thead>
             <tbody>
@@ -14,19 +17,15 @@
                 :key="post.id"
             >
                 <td>{{ post.title }}</td>
+                <td>{{ post.category.name }}</td>
             </tr>
             </tbody>
             <v-container>
-                <router-link to="/">
-                    Home
-                </router-link>
             </v-container>
         </template>
     </v-simple-table>
 </template>
 <script>
-import Service from '/assets/service.js';
-
 export default {
     name: 'Table',
     data() {

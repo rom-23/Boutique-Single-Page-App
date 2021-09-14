@@ -2,7 +2,6 @@
     <v-app light>
         <v-navigation-drawer color="secondary" v-model="drawer" app clipped width="40em">
             <v-container>
-
             </v-container>
         </v-navigation-drawer>
         <v-app-bar app clipped-left>
@@ -15,13 +14,20 @@
             <div class="flex-grow-1"></div>
             <v-toolbar-items class="nav navLink">
                 <ul class="nav">
-                    <router-link :to="{ name: 'home.table'}">Table</router-link>
-                    <router-link :to="{ name: 'home.date-picker'}">Datepicker</router-link>
+                    <router-link :to="{ name: 'table'}">Table</router-link>
+                    <router-link :to="{ name: 'date-picker'}">Datepicker</router-link>
                 </ul>
             </v-toolbar-items>
         </v-app-bar>
         <v-main>
-                <router-view name="main"/>
+            <v-row>
+                <v-col cols="8" class="p-5">
+                    <router-view name="main"></router-view>
+                </v-col>
+                <v-col cols="4" class="p-5">
+                    <router-view name="right"></router-view>
+                </v-col>
+            </v-row>
         </v-main>
         <v-footer app>
 
