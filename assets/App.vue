@@ -19,7 +19,7 @@
                 </ul>
             </v-toolbar-items>
         </v-app-bar>
-        <v-main>
+        <v-main class="container">
             <v-row>
                 <v-col cols="8" class="p-5">
                     <router-view name="main"></router-view>

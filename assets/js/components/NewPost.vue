@@ -9,7 +9,18 @@
                     <v-text-field
                         v-model="title"
                         :counter="10"
-                        label="gender"
+                        label="Title"
+                        required
+                    ></v-text-field>
+                </v-col>
+                <v-col
+                    cols="12"
+                    md="4"
+                >
+                    <v-text-field
+                        v-model="slug"
+                        :counter="10"
+                        label="Slug"
                         required
                     ></v-text-field>
                 </v-col>
@@ -20,7 +31,7 @@
                 >
                     <v-text-field
                         v-model="content"
-                        label="E-mail"
+                        label="email"
                         required
                     ></v-text-field>
                 </v-col>
@@ -30,12 +41,12 @@
                 >
                     <v-text-field
                         v-model="category"
-                        label="E-mail"
+                        label="Category"
                         required
                     ></v-text-field>
                 </v-col>
             </v-row>
-            <v-btn
+            <v-btn @click="submitMe"
                 class="mr-4"
                 type="submit"
             >
@@ -50,6 +61,7 @@ export default {
     data() {
         return {
             title    : '',
+            slug     : '',
             content  : '',
             category : ''
         };
@@ -58,8 +70,10 @@ export default {
     },
     mounted() {
     },
-    created: function () {
-
+    methods: {
+        submitMe() {
+            this.$store.dispatch('setPost');
+        }
     }
 }
 ;

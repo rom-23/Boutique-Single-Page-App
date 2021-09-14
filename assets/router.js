@@ -35,28 +35,16 @@ export default new Router({
                 main: () => {
                     return import('./js/components/DatePicker.vue');
                 }
-            }
-            // children: [
-            //     {
-            //         path       : 'table',
-            //         name       : 'home.table',
-            //         components : {
-            //             main: () => {
-            //                 return import('./js/components/Table.vue');
-            //             },
-            //             right: () => { return import('./js/components/NewPost.vue'); }
-            //         }
-            //     },
-            //     {
-            //         path       : 'date-picker',
-            //         name       : 'home.date-picker',
-            //         components : {
-            //             main: () => {
-            //                 return import('./js/components/DatePicker.vue');
-            //             }
-            //         }
-            //     }
-            // ]
+            },
+            children: [
+                {
+                    path       : 'info',
+                    name       : 'date-picker.info',
+                    components : {
+                        right: () => { return import('./js/components/Info.vue'); }
+                    }
+                }
+            ]
         },
         {
             path     : '*',

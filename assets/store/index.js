@@ -35,8 +35,26 @@ const actions = {
     getPosts({commit}) {
         Service.get(
             'http://127.0.0.1:8000/api/posts',
-            (response) => { console.log(response.data['hydra:member']);
+            (response) => {
                 commit('GET_POSTS', response.data['hydra:member']);
+            }
+        ).catch(error => {
+            console.log(error.message);
+        });
+    },
+    setPost({commit}) {
+        Service.post(
+            'http://127.0.0.1:8000/api/posts',
+            {
+                'title'    : 'string',
+                'slug'     : 'string',
+                'content'  : 'string',
+                'category' : {
+                    'name': 'string'
+                }
+            },
+            (response) => {
+                commit('SET_POST', response);
             }
         ).catch(error => {
             console.log(error.message);
@@ -46,6 +64,9 @@ const actions = {
 
 const mutations = {
     GET_POSTS(state, posts) {
+        state.posts = posts;
+    },
+    SET_POSTS(state, posts) {
         state.posts = posts;
     },
     setError(state, msg) {
