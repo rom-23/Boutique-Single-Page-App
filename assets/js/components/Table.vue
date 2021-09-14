@@ -10,10 +10,10 @@
             </thead>
             <tbody>
             <tr
-                v-for="item in users"
-                :key="item.email"
+                v-for="post in posts"
+                :key="post.id"
             >
-                <td>{{ item.email }}</td>
+                <td>{{ post.title }}</td>
             </tr>
             </tbody>
             <v-container>
@@ -31,18 +31,27 @@ export default {
     name: 'Table',
     data() {
         return {
-            users: []
+            users: {}
         };
     },
+    computed: {
+        posts() {
+            return this.$store.getters.allPosts;
+        }
+    },
+    mounted() {
+        this.$store.dispatch('getPosts');
+    },
     created: function () {
-        Service.get(
-            'https://randomuser.me/api/?results=5',
-            (response) => {
-                this.users = response.data.results;
-            }
-        ).catch(error => {
-            console.log(error.message);
-        });
+        // Service.get(
+        //     'http://127.0.0.1:8000/api/posts',
+        //     (response) => {
+        //         this.users = response.data['hydra:member'];
+        //     }
+        // ).catch(error => {
+        //     console.log(error.message);
+        // });
     }
-};
+}
+;
 </script>
