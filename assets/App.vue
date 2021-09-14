@@ -15,15 +15,13 @@
             <div class="flex-grow-1"></div>
             <v-toolbar-items class="nav navLink">
                 <ul class="nav">
-                    <router-link :to="{ name: 'table'}">Table</router-link>
-                    <router-link :to="{ name: 'datePicker'}">Datepicker</router-link>
+                    <router-link :to="{ name: 'home.table'}">Table</router-link>
+                    <router-link :to="{ name: 'home.date-picker'}">Datepicker</router-link>
                 </ul>
             </v-toolbar-items>
         </v-app-bar>
         <v-main>
-            <v-content>
                 <router-view name="main"/>
-            </v-content>
         </v-main>
         <v-footer app>
 
@@ -31,9 +29,6 @@
     </v-app>
 </template>
 <script>
-import Service from './service';
-// const axios = require('axios');
-// import router from '/assets/router.js';
 export default {
     name       : 'App',
     components : {},
@@ -55,14 +50,7 @@ export default {
     },
     methods : {},
     created : function () {
-        Service.get(
-            'https://randomuser.me/api/?nat=gb',
-            (response) => {
-                console.log('****** response is *******', response.data.results);
-            }
-        ).catch(error => {
-            console.log(error.message);
-        });
+
     }
 };
 </script>

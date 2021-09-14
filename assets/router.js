@@ -13,32 +13,25 @@ export default new Router({
             components : {
                 main: () => {
                     return import('./js/components/Home.vue');
+                }
+            },
+            children: [
+                {
+                    path      : 'table',
+                    name      : 'home.table',
+                    component : () => {
+                        return import('./js/components/Table.vue');
+                    }
                 },
-                children: [
-                    { path: '', component: UserHome },
-                    { path: 'profile', component: UserProfile },
-                    { path: 'posts', component: UserPosts }
-                ]
-            }
+                {
+                    path      : 'date-picker',
+                    name      : 'home.date-picker',
+                    component : () => {
+                        return import('./js/components/DatePicker.vue');
+                    }
+                }
+            ]
         },
-        // {
-        //     path       : 'table',
-        //     name       : 'table',
-        //     components : {
-        //         main: () => {
-        //             return import('./js/components/Table.vue');
-        //         }
-        //     }
-        // },
-        // {
-        //     path       : 'date-picker',
-        //     name       : 'datePicker',
-        //     components : {
-        //         main: () => {
-        //             return import('./js/components/DatePicker.vue');
-        //         }
-        //     }
-        // },
         {
             path     : '*',
             redirect : '/'
