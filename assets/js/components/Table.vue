@@ -42,14 +42,6 @@ export default {
         this.$store.dispatch('getPosts');
     },
     created: function () {
-        // Service.get(
-        //     'http://127.0.0.1:8000/api/posts',
-        //     (response) => {
-        //         this.users = response.data['hydra:member'];
-        //     }
-        // ).catch(error => {
-        //     console.log(error.message);
-        // });
     }
 }
 ;

@@ -42,19 +42,12 @@ const actions = {
             console.log(error.message);
         });
     },
-    setPost({commit}) {
+    setPost({commit}, params) {
         Service.post(
             'http://127.0.0.1:8000/api/posts',
-            {
-                'title'    : 'string',
-                'slug'     : 'string',
-                'content'  : 'string',
-                'category' : {
-                    'name': 'string'
-                }
-            },
+            params,
             (response) => {
-                commit('SET_POST', response);
+                commit('GET_POST', response);
             }
         ).catch(error => {
             console.log(error.message);
@@ -64,9 +57,6 @@ const actions = {
 
 const mutations = {
     GET_POSTS(state, posts) {
-        state.posts = posts;
-    },
-    SET_POSTS(state, posts) {
         state.posts = posts;
     },
     setError(state, msg) {
