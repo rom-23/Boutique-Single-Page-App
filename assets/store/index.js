@@ -21,13 +21,17 @@ const myPlugin = store => {
 
 //to handle state
 const state = {
-    posts: []
+    posts      : [],
+    categories : []
 };
 
 //to handle state
 const getters = {
     allPosts: state => {
         return state.posts;
+    },
+    allCategories: state => {
+        return state.categories;
     }
 };
 
@@ -47,7 +51,17 @@ const actions = {
             'http://127.0.0.1:8000/api/posts',
             params,
             (response) => {
-                commit('GET_POST', response);
+                commit('SET_POST', response.data);
+            }
+        ).catch(error => {
+            console.log(error.message);
+        });
+    },
+    getCategories({commit}) {
+        Service.get(
+            'http://127.0.0.1:8000/api/categories',
+            (response) => {
+                commit('GET_CATEGORIES', response.data['hydra:member']);
             }
         ).catch(error => {
             console.log(error.message);
@@ -58,6 +72,14 @@ const actions = {
 const mutations = {
     GET_POSTS(state, posts) {
         state.posts = posts;
+    },
+    SET_POST(state, posts) {
+        // state.posts = posts;
+
+        state.posts.push(posts);
+    },
+    GET_CATEGORIES(state, categories) {
+        state.categories = categories;
     },
     setError(state, msg) {
         state.error = msg;

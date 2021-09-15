@@ -37,13 +37,13 @@ class Post
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    #[Groups(['category:read','post:read'])]
+    #[Groups(['post:read'])]
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    #[Groups(['category:read','category:write','post:read','post:write']),
+    #[Groups(['post:read','post:write']),
         Length(min: 5)
     ]
     private ?string $title;

@@ -4,7 +4,10 @@
             <thead>
             <tr>
                 <th class="text-left">
-                    Email
+                    Name
+                </th>
+                <th class="text-left">
+                    Content
                 </th>
                 <th class="text-left">
                     Category
@@ -17,6 +20,7 @@
                 :key="post.id"
             >
                 <td>{{ post.title }}</td>
+                <td>{{ post.content }}</td>
                 <td>{{ post.category.name }}</td>
             </tr>
             </tbody>

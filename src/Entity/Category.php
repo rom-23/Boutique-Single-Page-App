@@ -39,7 +39,7 @@ class Category
     /**
      * @ORM\OneToMany(targetEntity=Post::class, mappedBy="category")
      */
-    #[Groups(['category:read'])]
+//    #[Groups(['category:read'])]
     private $posts;
 
     #[Pure] public function __construct()
