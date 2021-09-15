@@ -14,21 +14,21 @@ use Symfony\Component\Validator\Constraints\Valid;
  * @ORM\Entity(repositoryClass=PostRepository::class)
  */
 #[ApiResource(
-    collectionOperations: [
-        'get'=> [
-            'normalization_context' => ['groups' => ['read:Post:collection', 'read:Post:item', 'read:Post']]
-        ],
-        'post'
-    ],
-    itemOperations: [
-        'put',
-        'delete',
-        'get' => [
-            'normalization_context' => ['groups' => ['read:Post:collection', 'read:Post:item', 'read:Post']]
-        ]
-    ],
-    denormalizationContext: ['groups' => ['write:Post']],
-    normalizationContext: ['groups' => ['read:Post:collection']]
+//    collectionOperations: [
+//        'get'=> [
+//            'normalization_context' => ['groups' => ['read:Post:collection', 'read:Post:item', 'read:Post']]
+//        ],
+//        'post'
+//    ],
+//    itemOperations: [
+//        'put',
+//        'delete',
+//        'get' => [
+//            'normalization_context' => ['groups' => ['read:Post:collection', 'read:Post:item', 'read:Post']]
+//        ]
+//    ],
+    denormalizationContext: ['groups' => ['post:write']],
+    normalizationContext: ['groups' => ['post:read']]
 )]
 class Post
 {
@@ -37,13 +37,13 @@ class Post
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    #[Groups(['read:Post:collection'])]
+    #[Groups(['category:read','post:read'])]
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    #[Groups(['read:Post:collection', 'write:Post']),
+    #[Groups(['category:read','category:write','post:read','post:write']),
         Length(min: 5)
     ]
     private ?string $title;
@@ -51,30 +51,31 @@ class Post
     /**
      * @ORM\Column(type="string", length=255)
      */
-    #[Groups(['read:Post:collection', 'write:Post'])]
+    #[Groups(['post:read','post:write'])]
     private ?string $slug;
 
     /**
      * @ORM\Column(type="text")
      */
-    #[Groups(['read:Post:item', 'write:Post'])]
+    #[Groups(['post:read','post:write'])]
     private ?string $content;
 
     /**
      * @ORM\Column(type="datetime_immutable")
      */
-    #[Groups(['read:Post:item'])]
+    #[Groups(['post:read'])]
     private ?DateTimeImmutable $createdAt;
 
     /**
      * @ORM\Column(type="datetime_immutable")
      */
+    #[Groups(['post:read'])]
     private ?DateTimeImmutable $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="posts",cascade={"persist"})
      */
-    #[Groups(['read:Post:item', 'write:Post']),
+    #[Groups(['post:read','post:write']),
         Valid()
     ]
     private $category;

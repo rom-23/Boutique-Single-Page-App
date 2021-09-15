@@ -31,17 +31,16 @@
                 >
                     <v-text-field
                         v-model="content"
-                        label="email"
+                        label="content"
                         required
                     ></v-text-field>
                 </v-col>
-                <v-subheader>Selected Value: {{ selected}}</v-subheader>
+                <v-subheader>Selected Value: {{ selected }}</v-subheader>
                 <v-col
                     cols="12"
                     md="12"
                 >
-                    <v-select v-model="selected" :options="categories" :value="selected" label="name" :reduce="name => name.name"></v-select>
-<!--                    <v-select v-model="dbSelect" :items="categories" item-text="name" item-value="id" single-line label="Select category"></v-select>-->
+                    <v-select v-model="selected" :options="categories" :value="selected" label="name" :reduce="category => category.id" :components="{deselect}" placeholder="Select Category"></v-select>
                 </v-col>
             </v-row>
             <v-btn @click="addPost"
@@ -60,12 +59,16 @@ export default {
     name: 'NewPost',
     data() {
         return {
+            deselect: {
+                render: createElement => {
+                    return createElement('span', '❌');
+                }
+            },
             selected   : null,
             categories : [],
             title      : '',
             slug       : '',
-            content    : '',
-            category   : ''
+            content    : ''
         };
     },
     computed: {},
@@ -88,9 +91,7 @@ export default {
                 'title'    : this.title,
                 'slug'     : this.slug,
                 'content'  : this.content,
-                'category' : {
-                    'name': this.selected
-                }
+                'category' : '/api/categories/'+this.selected
             };
             this.$store.dispatch('setPost', params);
         }

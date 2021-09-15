@@ -14,7 +14,10 @@ use Symfony\Component\Validator\Constraints\Length;
 /**
  * @ORM\Entity(repositoryClass=CategoryRepository::class)
  */
-#[ApiResource]
+#[ApiResource(
+    denormalizationContext: ['groups' => ['category:write']],
+    normalizationContext: ['groups' => ['category:read']]
+)]
 class Category
 {
     /**
@@ -22,13 +25,13 @@ class Category
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    #[Groups(['read:Post'])]
+    #[Groups(['category:read','post:read'])]
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    #[Groups(['read:Post', 'write:Post']),
+    #[Groups(['category:read','category:write','post:read']),
         Length(min: 3)
     ]
     private $name;
@@ -36,6 +39,7 @@ class Category
     /**
      * @ORM\OneToMany(targetEntity=Post::class, mappedBy="category")
      */
+    #[Groups(['category:read'])]
     private $posts;
 
     #[Pure] public function __construct()
