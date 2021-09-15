@@ -40,20 +40,49 @@
                     cols="12"
                     md="12"
                 >
-                    <v-select v-model="selected" :options="cat" :value="selected" label="name" :reduce="category => category.id" placeholder="Select Category"></v-select>
+                    <v-select class="style-chooser" v-model="selected" :options="all_categories" :value="selected" label="name" :reduce="category => category.id" placeholder="Select Category"></v-select>
                 </v-col>
             </v-row>
             <v-btn @click="addPost"
-                   class="mr-4"
+                   class="mt-5"
             >
                 submit
             </v-btn>
         </v-container>
     </v-form>
 </template>
+<style>
+.style-chooser .vs__selected{
+    text-transform: lowercase;
+    font-variant: small-caps;
+}
+.style-chooser .vs__search::placeholder{
+    color: #394066;
+    text-transform: lowercase;
+    font-variant: small-caps;
+}
+.style-chooser .vs__dropdown-menu{
+    padding: 0;
+    margin-top: 0.1em;
+    background: #ffffff;
+    border: none;
+    color: #394066;
+    text-transform: lowercase;
+    font-variant: small-caps;
+}
+.style-chooser .vs__clear{
+    fill: #c42265;
+}
+.style-chooser .vs__open-indicator {
+    fill: rgba(22, 184, 61, 0.67);
+}
+.style-chooser .vs__dropdown-option--highlight{
+    background: rgba(22, 184, 61, 0.67);;
+}
+</style>
 <script>
 import Service from '/assets/service.js';
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters } from 'vuex';
 export default {
     name: 'NewPost',
     data() {
@@ -66,14 +95,14 @@ export default {
     },
     computed: {
         ...mapGetters({
-            cat: 'allCategories'
+            all_categories: 'category/allCategories'
         })
         // allCategories() {
         //     return this.$store.getters.allCategories;
         // }
     },
     mounted() {
-        this.$store.dispatch('getCategories');
+        this.$store.dispatch('category/getCategories');
     },
     created() {
         // Service.get(
@@ -93,9 +122,8 @@ export default {
                 'content'  : this.content,
                 'category' : '/api/categories/'+this.selected
             };
-            this.$store.dispatch('setPost', params);
+            this.$store.dispatch('post/setPost', params);
         }
     }
-}
-;
+};
 </script>

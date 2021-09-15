@@ -19,12 +19,12 @@
                 </ul>
             </v-toolbar-items>
         </v-app-bar>
-        <v-main class="container">
+        <v-main>
             <v-row>
-                <v-col cols="8" class="p-5">
+                <v-col cols="8" class="mt-5 p-5">
                     <router-view name="main"></router-view>
                 </v-col>
-                <v-col cols="4" class="p-5">
+                <v-col cols="4" class="mt-5 p-5">
                     <router-view name="right"></router-view>
                 </v-col>
             </v-row>

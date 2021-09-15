@@ -4,6 +4,9 @@
             <thead>
             <tr>
                 <th class="text-left">
+                    Id
+                </th>
+                <th class="text-left">
                     Name
                 </th>
                 <th class="text-left">
@@ -16,9 +19,10 @@
             </thead>
             <tbody>
             <tr
-                v-for="post in allPosts"
+                v-for="post in all_posts"
                 :key="post.id"
             >
+                <td>{{ post.id }}</td>
                 <td>{{ post.title }}</td>
                 <td>{{ post.content }}</td>
                 <td>{{ post.category.name }}</td>
@@ -39,13 +43,15 @@ export default {
         };
     },
     computed: {
-        ...mapGetters(['allPosts'])
+        ...mapGetters({
+            all_posts: 'post/allPosts'
+        })
         // post() {
         //     return this.$store.getters.allPosts;
         // }
     },
     mounted() {
-        this.$store.dispatch('getPosts');
+        this.$store.dispatch('post/getPosts');
     },
     created: function () {
     }

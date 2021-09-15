@@ -1,8 +1,8 @@
 import Service from '../../service';
 
 const category = {
-    // namespaced : true,
-    state: {
+    namespaced : true,
+    state      : {
         categories: []
     },
     mutations: {

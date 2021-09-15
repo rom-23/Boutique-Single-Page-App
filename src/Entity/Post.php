@@ -28,7 +28,10 @@ use Symfony\Component\Validator\Constraints\Valid;
 //        ]
 //    ],
     denormalizationContext: ['groups' => ['post:write']],
-    normalizationContext: ['groups' => ['post:read']]
+    normalizationContext: ['groups' => ['post:read']],
+    paginationItemsPerPage: 2,
+    paginationMaximumItemsPerPage:2,
+    paginationClientItemsPerPage: true
 )]
 class Post
 {

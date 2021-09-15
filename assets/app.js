@@ -9,7 +9,6 @@ import vSelect from 'vue-select';
 
 Vue.config.productionTip = false;
 Vue.component('v-select', vSelect);
-// Vue.use(vSelect);
 
 new Vue({
     router,

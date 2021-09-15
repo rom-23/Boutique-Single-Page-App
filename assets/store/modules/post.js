@@ -1,8 +1,8 @@
 import Service from '../../service';
 
 const post = {
-    // namespaced : true,
-    state: {
+    namespaced : true,
+    state      : {
         posts: []
     },
     mutations: {
@@ -18,6 +18,8 @@ const post = {
             Service.get(
                 'http://127.0.0.1:8000/api/posts',
                 (response) => {
+                    // console.log(response.data['hydra:totalItems']);
+                    // this.state.total = response.data['hydra:totalItems'];
                     commit('GET_POSTS', response.data['hydra:member']);
                 }
             ).catch(error => {

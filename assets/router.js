@@ -12,7 +12,7 @@ export default new Router({
             name       : 'home',
             components : {
                 main: () => {
-                    return import('./js/components/Home.vue');
+                    return import('./components/Home.vue');
                 }
             }
         },
@@ -21,10 +21,10 @@ export default new Router({
             name       : 'table',
             components : {
                 main: () => {
-                    return import('./js/components/Table.vue');
+                    return import('./components/Table.vue');
                 },
                 right: () => {
-                    return import('./js/components/NewPost.vue');
+                    return import('./components/NewPost.vue');
                 }
             }
         },
@@ -33,7 +33,7 @@ export default new Router({
             name       : 'date-picker',
             components : {
                 main: () => {
-                    return import('./js/components/DatePicker.vue');
+                    return import('./components/DatePicker.vue');
                 }
             },
             children: [
@@ -41,7 +41,7 @@ export default new Router({
                     path       : 'info',
                     name       : 'date-picker.info',
                     components : {
-                        right: () => { return import('./js/components/Info.vue'); }
+                        right: () => { return import('./components/Info.vue'); }
                     }
                 }
             ]
