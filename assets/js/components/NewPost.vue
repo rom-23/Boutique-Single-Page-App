@@ -40,12 +40,11 @@
                     cols="12"
                     md="12"
                 >
-                    <v-select v-model="selected" :options="allCategories" :value="selected" label="name" :reduce="category => category.id" placeholder="Select Category"></v-select>
+                    <v-select v-model="selected" :options="cat" :value="selected" label="name" :reduce="category => category.id" placeholder="Select Category"></v-select>
                 </v-col>
             </v-row>
             <v-btn @click="addPost"
                    class="mr-4"
-
             >
                 submit
             </v-btn>
@@ -54,7 +53,7 @@
 </template>
 <script>
 import Service from '/assets/service.js';
-
+import { mapGetters, mapActions } from 'vuex';
 export default {
     name: 'NewPost',
     data() {
@@ -66,9 +65,12 @@ export default {
         };
     },
     computed: {
-        allCategories() {
-            return this.$store.getters.allCategories;
-        }
+        ...mapGetters({
+            cat: 'allCategories'
+        })
+        // allCategories() {
+        //     return this.$store.getters.allCategories;
+        // }
     },
     mounted() {
         this.$store.dispatch('getCategories');

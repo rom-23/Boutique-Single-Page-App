@@ -16,7 +16,7 @@
             </thead>
             <tbody>
             <tr
-                v-for="post in posts"
+                v-for="post in allPosts"
                 :key="post.id"
             >
                 <td>{{ post.title }}</td>
@@ -30,6 +30,7 @@
     </v-simple-table>
 </template>
 <script>
+import { mapGetters } from 'vuex';
 export default {
     name: 'Table',
     data() {
@@ -38,9 +39,10 @@ export default {
         };
     },
     computed: {
-        posts() {
-            return this.$store.getters.allPosts;
-        }
+        ...mapGetters(['allPosts'])
+        // post() {
+        //     return this.$store.getters.allPosts;
+        // }
     },
     mounted() {
         this.$store.dispatch('getPosts');
